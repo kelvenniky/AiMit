@@ -1,19 +1,29 @@
-const { default: SummaryApi } = require("../common")
+const { default: SummaryApi } = require("../common");
 
-const fetchCategoryWiseProduct = async(category)=>{
-    const response = await fetch(SummaryApi.categoryWiseProduct.url,{
-        method : SummaryApi.categoryWiseProduct.method,
-        headers : {
-            "content-type" : "application/json"
-        },
-        body : JSON.stringify({
-            category : category
-        })
-    })
+const fetchCategoryWiseProduct = async (category) => {
+    try {
+        // Construct the URL with query parameters
+        const response = await fetch(`${SummaryApi.categoryWiseProduct.url}?category=${encodeURIComponent(category)}`, {
+            method: 'GET', // Use GET method
+            headers: {
+                "Content-Type": "application/json" // Optional for GET requests
+            }
+        });
 
-    const dataResponse = await response.json()
+        // Check if the response is okay
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Network response was not ok: ${response.status} - ${errorText}`);
+        }
 
-    return dataResponse
-}
+        // Parse the JSON response
+        const dataResponse = await response.json();
+        return dataResponse;
 
-export default fetchCategoryWiseProduct
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return null; // Handle the error in your component
+    }
+};
+
+export default fetchCategoryWiseProduct;
