@@ -32,11 +32,12 @@ const Login = () => {
         e.preventDefault()
 
         const dataResponse = await fetch(SummaryApi.signIn.url,{
-            method : SummaryApi.signIn.method,
+            method: 'POST',
             credentials : 'include',
             headers : {
                 "content-type" : "application/json"
             },
+            
             body : JSON.stringify(data)
         })
 
