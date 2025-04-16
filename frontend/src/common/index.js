@@ -115,7 +115,7 @@ const SummaryApi = {
     },
     SaleType:{
          url : `${backendDomin}/api/sale-type`,
-        method : 'post'
+        method : 'get'
     },
     addAddress:{
         url : `${backendDomin}/api/add-address`,
