@@ -1,4 +1,4 @@
-const { default: SummaryApi } = require("../common")
+const { SummaryApi } = require("../common")
 
 const fetchSaleTypeWiseProduct = async(saleType)=>{
     const response = await fetch(SummaryApi.SaleType.url,{
